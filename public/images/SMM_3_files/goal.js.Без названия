@@ -1,0 +1,57 @@
+$(document).ready(function(){
+  /*
+   
+   
+Метка: online 
+Кнопка: Онлайн заявка - главная 
+
+Метка: podrobnee 
+Кнопка: Узнать подробнее - главная 
+
+Метка: leftklient 
+Кнопка: Стрелка влево (наши клиенты) 
+
+Метка: rightklient 
+Кнопка: Стрелка вправо (наши клиенты) 
+
+Метка: salesup 
+Кнопка: Лого разработчика в футере 
+
+Метка: bolsheotzivov 
+Кнопка: [Больше отзывов] на странице отзывов 
+
+Метка: zakazatceni 
+Кнопка: Заказать на странице с ценами 
+
+Метка: napisatnam 
+Кнопка: Написать нам на странице с контактами
+   * */
+  $(".online-app").click(function(){
+    yaCounter41774384.reachGoal('online');
+  });
+  
+  $(".seeview").click(function(){
+    yaCounter41774384.reachGoal('podrobnee');
+  });
+  $(".goall").click(function(){
+    yaCounter41774384.reachGoal('leftklient');
+  });
+  $(".goalr").click(function(){
+    yaCounter41774384.reachGoal('rightklient');
+  });
+  $(".footer-logo a").click(function(){
+    yaCounter41774384.reachGoal('salesup');
+  });
+  $(".addmore1").click(function(){
+    yaCounter41774384.reachGoal('bolsheotzivov');
+  });
+  $(".order").click(function(){
+    yaCounter41774384.reachGoal('zakazatceni');
+  });
+  $(".bt1").click(function(){
+    yaCounter41774384.reachGoal('napisatnam');
+  });
+  $(".bt2").click(function(){
+    yaCounter41774384.reachGoal('napisatnam');
+  });
+});

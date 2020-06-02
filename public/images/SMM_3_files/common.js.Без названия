@@ -1,0 +1,538 @@
+$(document).ready(function() {
+  $.ajax({
+    url:"http://ip-api.com/json",
+    type:"GET",
+    success:function(data){
+      
+      
+      $.ajax({
+        url:"https://restcountries.eu/rest/v1/alpha/" + data['countryCode'],
+        type:"GET",
+        success:function(data){
+          var t = (data['callingCodes']).toString()
+          
+            if(t == 380){
+              $("form input[name=phone]").inputmask("+"+ t/10 + " (099) 999-99-99");
+              $("form input[name=phone]").attr("data-len",17+t.length-1)
+            }else{
+              $("form input[name=phone]").inputmask("+"+ t + " (999) 999-99-99");
+              $("form input[name=phone]").attr("data-len",17+t.length)   
+            }
+            
+           
+        }
+      });
+    }
+  });
+ $('input,textarea').focus(function(){
+ $(this).data('placeholder',$(this).attr('placeholder'))
+        .attr('placeholder','');
+
+}).blur(function(){
+   $(this).attr('placeholder',$(this).data('placeholder'));
+});
+  
+  var pref = "";
+  $('.popup-send').magnificPopup({
+    type: 'inline',
+  });
+  $(".burger").click(function(){
+    $(this).toggleClass("active");
+    $(".mobile-menu").slideToggle();
+    $(".mobile-menu").css("top",$(".header").innerHeight()+19)
+  });
+  function formValidate(form){
+    var t = true;
+    $(form).find("input").each(function(){
+      
+      if($(this).attr("name") == "phone"){
+        
+        
+        if($(this).val()[parseInt($(this).attr("data-len"))-1] == "_" || $(this).val() == ""){
+          t = false;
+          var border = $(this).css("border");
+          inputColor($(this),border);
+        }
+      }else{
+        if($(this).val() == "" ){
+          t = false;
+          var border = $(this).css("border");
+          inputColor($(this),border);
+        }
+      }
+    })
+    $(form).find("textarea").each(function(){
+      if($(this).val() == ""){
+        t = false;
+        var border = $(this).css("border");
+        inputColor($(this),border);
+      }
+    })
+    return t;
+  }
+  function inputColor(input,border){
+    $(input).css("border","10px solid red")
+    
+    
+    setTimeout(function(){
+      $(input).css("border",border)
+      
+    },2000)
+  }
+  $(".popup form").on('submit',function(){
+    var th = $(this);
+     if(formValidate(th)){
+      
+    
+      $.ajax({
+        type: "GET",
+        url: pref+"/wp-content/themes/smm/mail.php",
+        data: $(this).serialize()
+      }).done(function() {
+       $(th)[0].reset();
+         $.magnificPopup.close({});
+          $.magnificPopup.open({
+            items: {
+              src: $('#popup1')[0].outerHTML
+            },
+            type: 'inline'
+          });
+          $('#popup1').css("display", "block");
+          setTimeout(function() {
+            $.magnificPopup.close({});
+            $('#popup1').css("display", "none");
+          }, 4000);
+      });  
+    }
+    return false;
+  });
+  $(".form-page-contatcs form").on('submit',function(event){
+    var th = $(this);
+     if(formValidate(th)){
+       
+      $.ajax({
+        type: "GET",
+        url: pref+"/wp-content/themes/smm/mail.php",
+        data: $(this).serialize()
+      }).done(function() {
+        $(th)[0].reset();
+         $.magnificPopup.close({});
+          $.magnificPopup.open({
+            items: {
+              src: $('#popup1')[0].outerHTML
+            },
+            type: 'inline'
+          });
+          $('#popup1').css("display", "block");
+          setTimeout(function() {
+            $.magnificPopup.close({});
+            $('#popup1').css("display", "none");
+          }, 4000);
+      });  
+    }
+     event.preventDefault();
+  });
+	$('.teams').slick({
+  dots: false,
+  arrows:false,
+  speed: 300,
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  
+  responsive: [
+    {
+      breakpoint: 1170,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        
+        dots: true
+      }
+    },
+    {
+      breakpoint: 800,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        dots:true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots:true
+      }
+    },
+    
+    
+  ]
+  });
+  $('.clients-slider').slick({
+    
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1, 
+    
+    
+     prevArrow: '<a href="#" class="goall arrow-client ac-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>',
+    nextArrow: '<a href="#" class="goalr arrow-client ac-next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>',
+    centerMode: true,
+    centerPadding: '0px',
+     responsive: [
+      {
+        breakpoint: 1090,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          centerMode:false,
+          arrows:false,
+          dots:true,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode:false,
+          arrows:false,
+          dots:true,
+        }
+      },
+    ]
+  });
+  var page = 1;
+  var type = "all";
+  var s = false;
+  $(".filter a").click(function(){
+    $(".filter a").removeClass("active")
+    $(this).addClass("active");
+    var f = $(this).attr("f");
+    page = 1;
+    type = f;
+    s = false;
+    ajaxWork(true,12);
+    return false;
+  })
+  function getCat(type){
+    var id = 5;
+    if(type == "vk"){
+      id = 6
+    }
+    if(type == "fb"){
+      id = 7
+    }
+    if(type == "od"){
+      id = 8
+    }
+    if(type == "inst"){
+      id = 9
+    }
+    return id;
+  }
+  $(".addmore").click(function(){
+    
+    if(!s){
+      page = 4;
+      s = true;
+    }
+    else{
+      page++;
+    }
+    ajaxWork(false,4)
+    
+    return false;
+  });
+  function ajaxWork(empty,count){
+     $.ajax({
+      url: pref + "/wp-admin/admin-ajax.php",
+      type: 'post',
+      beforeSend: function() {
+        $(".works").css("opacity","0.5");
+        $(".laodbar").width(0);
+        $(".laodbar").animate({
+          'width':'100%'
+        },1000,function(){
+          $(".laodbar").width(0);
+        })
+      },
+      data: {
+        action: 'get_work',
+        page: page,
+        cat:getCat(type),
+        count:count
+      },
+      success:function(data){
+        
+        if(!empty){
+          $(".works").append(data)
+        }else{
+          $(".works").empty()
+          $(".works").append(data)
+        }
+        $(".ajaxload").toggle('slow',function(){
+          $(this).removeClass("ajaxload");
+        })
+        $(".works").css("opacity","1")
+      }
+    });
+  }
+  $(".addmore1").click(function(){
+    reviewAjax();  
+    return false;
+  });
+  $(".addmore-news").click(function(){
+    newsAjax();  
+    return false;
+  });
+  function newsAjax(){
+    $.ajax({
+      url: pref + "/wp-admin/admin-ajax.php",
+      type: 'post',
+      beforeSend: function() {
+        $(".news").css("opacity","0.5");
+        $(".laodbar").width(0);
+        $(".laodbar").animate({
+          'width':'100%'
+        },1000,function(){
+          $(".laodbar").width(0);
+        })
+      },
+      data: {
+        action: 'get_news',
+        page: $(".news").attr("page"),
+        
+      },
+      success:function(data){
+        
+       
+          $(".news").append(data)
+        
+        $(".news").attr("page",parseInt($(".news").attr("page"))+1)
+        $(".news").css("opacity","1")
+      }
+    });
+  }
+  function reviewAjax(){
+    $.ajax({
+      url: pref + "/wp-admin/admin-ajax.php",
+      type: 'post',
+      beforeSend: function() {
+        $(".reviews").css("opacity","0.5");
+        $(".laodbar").width(0);
+        $(".laodbar").animate({
+          'width':'100%'
+        },1000,function(){
+          $(".laodbar").width(0);
+        })
+      },
+      data: {
+        action: 'get_review',
+        page: $(".reviews").attr("page"),
+        
+      },
+      success:function(data){
+        
+       
+          $(".reviews").append(data)
+        
+        $(".reviews").attr("page",parseInt($(".reviews").attr("page"))+1)
+        $(".reviews").css("opacity","1")
+      }
+    });
+  }
+  $(".slidervideo").slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+   
+    asNavFor: '.slidervideo1',
+    responsive: [
+    {
+      breakpoint: 1170,
+      settings: {
+        
+        
+        dots: true
+      }
+    }]
+  });
+  $(".slidervideo1").slick({
+    arrows:true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    asNavFor: '.slidervideo',
+    centerMode: true,
+    centerPadding:"0",
+     prevArrow: '<a href="#" class="arrow-client arrow-client1 ac-prev ac-prev1"><i class="fa fa-angle-left" aria-hidden="true"></i></a>',
+    nextArrow: '<a href="#" class="arrow-client arrow-client1 ac-next ac-next1"><i class="fa fa-angle-right" aria-hidden="true"></i></a>',
+  });
+  YouTubeImg(".sv-item");
+  YouTubeImg1(".sv-item1");
+  $(".sv-item").click(function(){
+    var url = $(this).attr("url")
+    $(this).css("background","none")
+    $(this).children(".play").remove();
+    $(this).append("<iframe src="+url+'?autoplay=1'+"></iframe>")
+  })
+  function YouTubeImg(clas){
+    $(clas).each(function(){
+      var url = $(this).attr("url")
+      var th = $(this)
+      var id = url.split("/")[url.split("/").length-1]
+      
+      $.ajax({
+        url:"https://www.googleapis.com/youtube/v3/videos?key=AIzaSyAdnxcrfZYGewc7H7A6C3kuqba2yyGZ2xk&part=snippet&id=" + id,
+        success:function(a){
+          th.css({
+            "background":"url("+a['items'][0]['snippet']['thumbnails']['high']['url']+") no-repeat",
+            "background-position":"0",
+            "background-size":"cover"
+          })
+          
+        }
+      })
+    })
+  }
+  function YouTubeImg1(clas){
+    $(clas).each(function(){
+      var url = $(this).attr("url")
+      var th = $(this)
+      var id = url.split("/")[url.split("/").length-1]
+      
+      $.ajax({
+        url:"https://www.googleapis.com/youtube/v3/videos?key=AIzaSyAdnxcrfZYGewc7H7A6C3kuqba2yyGZ2xk&part=snippet&id=" + id,
+        success:function(a){
+          
+          th.children("div").css({
+            "background":"url("+a['items'][0]['snippet']['thumbnails']['high']['url']+") no-repeat",
+            "background-position":"0",
+            "background-size":"cover"
+          })
+          
+        }
+      })
+    })
+  }
+  
+  
+/*$(".dd ul li:nth-child(1)").click(function(){
+  var price = $(".price-variable").attr("cost").split(";")[0];
+  $(".price-variable span:nth-child(1)").text(price);
+  $(".price-variable span:nth-child(2) p:nth-child(1)").html('руб.<i class="fa fa-sort-desc" aria-hidden="true"></i>')
+  $(".dd").toggle("slow");
+  $(".price-variable i").click(function(){
+    $(".dd").toggle("slow");
+  });
+})
+$(".dd ul li:nth-child(2)").click(function(){
+  var price = $(".price-variable").attr("cost").split(";")[1];
+  $(".price-variable span:nth-child(1)").text(price);
+  $(".price-variable span:nth-child(2) p:nth-child(1)").html('грн.<i class="fa fa-sort-desc" aria-hidden="true"></i>')
+  $(".dd").toggle("slow");
+  $(".price-variable i").click(function(){
+  $(".dd").toggle("slow");
+});
+})
+$(".dd ul li:nth-child(3").click(function(){
+  var price = $(".price-variable").attr("cost").split(";")[2];
+  $(".price-variable span:nth-child(1)").text(price);
+  $(".price-variable span:nth-child(2) p:nth-child(1)").html('$<i class="fa fa-sort-desc" aria-hidden="true"></i>')
+  $(".dd").toggle("slow");
+  $(".price-variable i").click(function(){
+  $(".dd").toggle("slow");
+});
+})*/
+$(".price-variable i").click(function(){
+  $(".dd").toggle("slow");
+});
+ 
+  
+  
+  $('.slidervideo1').on('click', 'div', function(e){
+      var th = $(this);
+      e.stopPropagation();
+  
+      var currentIndex = $('.slidervideo1').slick("slickCurrentSlide");
+      var slideIndex = $(this).parent().attr("data-slick-index");
+      if($(".slidervideo1 > div > div > div").length > 3){
+        if($(this).attr("class").split(" ").indexOf("slick-center") == -1){
+          
+          
+          if(currentIndex == slideIndex)
+          {
+              
+              return;
+          }
+          else if(currentIndex - 1 == slideIndex)
+          {
+              
+              $('.slidervideo1').slick("slickPrev");
+          }
+          else if(currentIndex + 1 == slideIndex)
+          {
+              
+              $('.slidervideo1').slick("slickNext");
+          }
+          else if(currentIndex == 0)
+          {
+              
+              $('.slidervideo1').slick("slickPrev");
+          }
+          else
+          {
+              
+              $('.slidervideo1').slick("slickNext");
+          }
+        }
+      }else{
+        $(".sv-item1").removeClass("slick-current");
+        console.log(slideIndex);
+        $('.slidervideo').slick('slickGoTo', slideIndex, false);
+      }
+  });
+  //slide work
+   $('.clients-slider').on('click', 'div', function(e){
+      
+      e.stopPropagation();
+  
+      var currentIndex = $('.clients-slider').slick("slickCurrentSlide");
+      var slideIndex = $(this).parent().attr("data-slick-index");
+      if($(window).width()<1090){
+        window.open($(this).parent().attr("href"),'_blank');
+      }
+      
+      if($(this).attr("class").split(" ").indexOf("slick-center") == -1){
+        
+        
+        if(currentIndex == slideIndex)
+        {
+          window.open($(this).parent().attr("href"),'_blank');
+        }
+        else if(currentIndex - 1 == slideIndex)
+        {
+            $('.clients-slider').slick("slickPrev");
+        }
+        else if(currentIndex + 1 == slideIndex)
+        {
+            $('.clients-slider').slick("slickNext");
+        }
+        else if(currentIndex == 0)
+        {
+            $('.clients-slider').slick("slickPrev");
+        }
+        else
+        {
+            $('.clients-slider').slick("slickNext");
+        }
+      }
+  });
+  
+  
+  $('.clients-slider').on('afterChange', function(event, slick, currentSlide, nextSlide){
+    
+    
+  });
+});

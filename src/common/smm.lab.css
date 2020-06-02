@@ -1,0 +1,464 @@
+*{
+	box-sizing: border-box;
+}
+
+body{
+	font-family: 'Roboto', sans-serif;
+	background-image: url(white-flecks.png);
+}
+
+.logo{
+	padding-left:55px;
+}
+
+.row:after{
+	content: "";
+	clear: both;
+	display: block;
+}
+
+.header{
+	padding:35px;
+	background-color: rgba(255,255,255,0.75);
+}
+.col-md-1{
+	width: 12%
+}
+.col-md-4{
+	width: 40%
+}
+.col-md-2{
+	width: 20%
+}
+
+.col-md-3{
+	width: 25%
+}
+.col-md-5{
+	width: 33.3%
+}
+
+.col-md-8{
+	width: 80%
+}
+.col-md-6{
+	width: 60%
+}
+
+[class*="col-"]{
+	float:left;
+}
+
+.menu > li{
+	width: 20%;
+	float:left;
+	border-left: 1px solid blue;
+	list-style-type: none;
+	position: relative;
+}
+
+.menu > li:last-child{
+	border-right: 1px solid blue;
+}
+.menu a {
+	display: block;
+	height: 50px;
+	font-size: 11px;
+	text-align: center;
+	line-height: 50px;
+	color: #FF4500;
+	font-weight: 200;
+	text-decoration:none;
+	font-weight: bold;
+}
+
+.menu li:hover a{
+	background-color: blue;
+	color: white;
+}
+
+
+.submenu{ 
+	position: absolute;
+	height: 150px;
+	color: white;
+	background-color: #2c71b8;
+  	font-size: 17px;
+  	top: 50px;
+  	width: 204px;
+  	list-style-type: none;
+  	text-align: left;
+	display: none;
+}
+
+ .submenu li:hover a{
+	background-color: white;
+	color:  #2c71b8;
+}
+.menu > li:hover .submenu{
+  visibility: visible;
+  display: block;
+  opacity: 9;
+  transform: perspective(900px) rotateX(0deg);
+}
+
+.text{
+
+	background-color: blue;
+	height: 50px;
+	text-transform: uppercase;
+}
+
+.mainborder{
+    margin: auto;
+    background-size: contain;
+	position: relative;
+	text-align: center;
+	color: #fafafa;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+.mainborder ul li:before {
+    content: '';
+    position: absolute;
+    height: 31px;
+    background-image:url(next.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+
+.mainborder span {
+    display: block;
+    font-size: 47px;
+    color: #fff;
+    position: relative;
+    left: -100px;
+    top: -60px;
+ }
+
+ .mainborder ul {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -10px;
+}
+
+.mainborder ul li {
+    position: relative;
+    list-style: none;
+    text-transform: uppercase;
+    font-size: 24px;
+    color: #fff;
+}
+
+.name1{
+	font-weight: bold;
+	font-size: 35px;
+	margin-top: 10px;
+}
+
+.name2{
+	
+	font-size: 55px;
+	text-decoration:none;
+}
+
+.name3{
+	font-size: 36px;
+    text-transform: uppercase;
+    color: #363636;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.now{
+    background-color: #fafafa;
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
+
+.soc{
+    background-color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+	
+.onlineapplication{
+	display: block;
+	background-color: #FF8C00;
+	color: white;
+	height: 50px;
+	width: 250px;
+	border:orange;
+	font-size: 20px;
+	text-transform: uppercase;
+	cursor: pointer;
+	border-radius: 5px;
+	margin-top: 20px;
+}
+
+.onlineapplication:hover {
+	background-color: #FF4500;
+}
+
+#window{
+	background-color: white;
+	margin: 40px auto;
+	display: none;
+	width: 280px;
+	height: 180px;
+	z-index: 150;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+
+}
+.form{
+	width: 250px;
+	margin: 0 auto 20px auto;
+	text-align: center;
+}
+
+.input{
+	width: 250px;
+	padding: 5px;
+	margin-bottom: 10px;
+	border: 3px solid grey;
+	border-radius: 5px;
+}
+.submit{
+	background-color: #FF8C00;
+	color: white;
+	height: 50px;
+	width: 250px;
+	border:orange;
+	font-size: 20px;
+	text-transform: uppercase;
+	cursor: pointer;
+	border-radius: 5px;
+
+}
+.submit:hover{
+	background-color: #FF4500;
+}
+
+.close{
+	margin: 13px 0 0 250px;
+	cursor: pointer;
+}
+
+#gray {
+	background-color: rgba(1,1,1,0.75);
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	display: none;
+	z-index: 150;
+}
+
+.social{
+	padding-left: 100px;
+	margin: 50px;
+}
+
+.name4{
+	color: grey;
+	text-align: center;
+	margin-top: -35px;
+	font-size: 19px;
+}
+
+.name5{
+	color: grey;
+	text-align: center;
+    margin-top: 5px;
+    font-size:  19px;
+}
+
+.name6{
+	color: grey;
+	text-align: center;
+	margin-top: -25px
+}
+
+.name8{
+	color: black;
+	text-align: center;
+	font-weight: bold;
+	font-size:32px;
+	padding: 50px;
+}
+
+.name9{
+	color: black;
+	text-align: center;
+	font-weight: bold;
+	font-size:25px;
+	padding: 20px;
+}
+
+.footer{
+	background-color: #363636;
+	height: 150px;
+}
+
+
+.menu2 > li{
+	width: 15%;
+	float:left;
+	list-style-type: none;
+	position: relative;
+	padding: 10px;
+	margin-top: 22px;
+}
+
+.menu2  > li:last-child{
+	border-right: 1px white;
+}
+.menu2 > li:first-child{
+	border-right: 1px white;
+}
+.menu2 a {
+	display: block;
+	height: 50px;
+	font-size: 15px;
+	text-align: center;
+	line-height: 50px;
+	color: #606060;
+	font-weight: 200;
+	text-decoration:none;
+}
+
+.menu2 li:hover a{
+	color:  #FF4500;
+
+}
+.contacts{
+	color: white;
+	padding: 25px;
+	line-height: 1.5;
+}
+
+.work{
+	width: 350px;  
+	padding: 25px;
+
+}
+
+.why{
+	color: grey;
+	line-height: 1.5;
+	font-size: 19px;
+	width: 60%;
+	margin-left: 250px;
+	position: relative;
+	padding: 25px;
+}
+
+.why ul li:before {
+    content: '';
+    position: absolute;
+    left: -50px;
+    width: 30px;
+    height: 31px;
+    background-image:url(next.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+
+
+.work {
+	font:rgba(0,128,192,0.7);
+}
+
+.client{
+	color: grey;
+	font-size: 32px;
+	text-align: center;
+}
+.percent{
+	color: #f38120;
+	font-size: 55px;
+	font-weight: bold;
+}
+
+
+.name10{
+	font-size: 36px;
+    text-transform: uppercase;
+    color: #363636;
+    text-align: center;
+    font-weight: bold;
+    margin-top: -55px;
+}
+
+
+.services{
+	color: black;
+	text-align: center;
+	font-weight: bold;
+	font-size:22px;
+}
+
+.services1{
+	color: black;
+	text-align: center;
+	font-weight: bold;
+	font-size:22px;
+	padding: 5px;
+}
+
+.standart{
+	color: black;
+	font-size:  16px;
+	line-height: 1.5;
+	margin-left: 90px;
+	position: relative;
+}
+
+.standart ul li:before {
+    content: '';
+    position: absolute;
+    left: -50px;
+    width: 30px;
+    height: 31px;
+    background-image:url(next.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+
+.t2{
+	padding: 40px;
+}
+.product-quantity button{
+    width:30px;
+    height: 30px;
+    cursor:pointer;
+    background-color: grey;
+    border:none;
+    color:white;
+
+}
+
+.product-quantity input{
+    text-align: center;
+    height: 30px;
+}
+
+.product-quantity button:hover{
+   
+   background-color: black;
+   color:white;
+}
+
+.product-quantity{
+    text-align: center;
+}
+
